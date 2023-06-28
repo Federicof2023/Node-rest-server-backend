@@ -17,9 +17,14 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "bootstrap": "^5.3.0",
+    "cloudinary": "^1.37.3",
     "cors": "^2.8.5",
+    "express-fileupload": "^1.4.0",
     "express-validator": "^7.0.1",
+    "google-auth-library": "^8.8.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.3.0"
+    "mongoose": "^7.3.0",
+    "uuid": "^9.0.0"
   }
 }

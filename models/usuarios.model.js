@@ -22,6 +22,7 @@ const UsuarioSchema = new mongoose.Schema(
       type: String,
       required: true,
       emun: ["ADMIN_ROLE", "USER_ROLE"],
+      default: "USER_ROLE",
     },
     estado: {
       type: Boolean,
@@ -40,11 +41,6 @@ UsuarioSchema.methods.toJSON = function () {
   usuario.uid = _id
   return usuario
 }
-
-
-
-
-
 
 
 module.exports = mongoose.model("Usuario", UsuarioSchema);

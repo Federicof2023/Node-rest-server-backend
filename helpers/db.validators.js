@@ -1,6 +1,7 @@
+const { Categoria, Usuario, Producto } = require("../models");
 const Role = require("../models/role.model");
-const Usuario = require("../models/usuarios.model");
 
+// validador para los roles //
 const isValidRole = async (role = "") => {
   const existRole = await Role.findOne({ role });
   if (!existRole) {
@@ -10,6 +11,7 @@ const isValidRole = async (role = "") => {
   }
 };
 
+// validador para email //
 const emailExiste = async (correo = "") => {
   // verificar si el correo existe //
   const existeEmail = await Usuario.findOne({ correo });
@@ -21,15 +23,7 @@ const emailExiste = async (correo = "") => {
   }
 };
 
-// const usuarioValidoPorId = async (id) => {
-//   // verificar si el correo existe //
-//   const usuarioValido = await Usuario.findById(id)
-
-//   if (!usuarioValido) {
-//     throw new Error(`El ID ${id} no existe`);
-//   }
-// };
-
+// validador para Usuarios //
 const usuarioValidoPorId = async (id) => {
   if (id.match(/^[0-9a-fA-F]{24}$/)) {
     const usuarioValido = await Usuario.findById(id).exec();
@@ -41,4 +35,56 @@ const usuarioValidoPorId = async (id) => {
   }
 };
 
-module.exports = { isValidRole, emailExiste, usuarioValidoPorId };
+// validador para las Productos //
+const productoValidoporID = async (id) => {
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    const productoValido = await Producto.findById(id).exec();
+    if (!productoValido) {
+      throw new Error(`El id ${id} no existe`);
+    }
+  } else {
+    throw new Error(`El ID -> ${id} no es un ID válido`);
+  }
+};
+
+// validador para las Categorias //
+const categoriaValidaporID = async (id) => {
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    const categoriaValida = await Categoria.findById(id).exec();
+    if (!categoriaValida) {
+      throw new Error(`El id ${id} no existe`);
+    }
+  } else {
+    throw new Error(`El ID -> ${id} no es un ID válido`);
+  }
+};
+
+// validador para colleciones permitidas de archivos/imagenes //
+
+const coleccionesValidas = (coleccion = '', colecciones = []) => {
+
+  const coleccionIncluida = colecciones.includes(coleccion)
+
+  if (!coleccionIncluida) {
+    throw new Error(`la coleccion ${coleccion} no esta permitida - ${colecciones}`)
+  }
+
+  return true
+
+}
+
+
+
+
+
+
+
+
+module.exports = {
+  isValidRole,
+  emailExiste,
+  usuarioValidoPorId,
+  categoriaValidaporID,
+  productoValidoporID,
+  coleccionesValidas
+};

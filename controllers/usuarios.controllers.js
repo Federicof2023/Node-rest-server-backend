@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+
 const Usuario = require("../models/usuarios.model");
 const bcrypt = require("bcrypt");
 
@@ -62,10 +62,7 @@ const usuariosPatch = (req, res) => {
 };
 // DELETE //
 const usuariosDelete = async (req, res) => {
-
   const { id } = req.params
-
-
 
   // elimnino usuario , me traigo el usuario eliminado y el usuario autenticado //
   const usuario = await Usuario.findByIdAndUpdate(id, { estado: false })
